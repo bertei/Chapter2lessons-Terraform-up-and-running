@@ -17,3 +17,11 @@ resource "PROVIDER_TYPE" "NAME" {}
 * EC2 user data is a set of instructions used to configure an EC2 instance at launch time using cloud-init or shell scripting.
 * The <<-EOF and EOF are Terraform's heredoc syntax, which allows you to create multiline strings without having to insert \n characters all over the place.
 * The user_data_replace_on_change parameter is set to true so that when you change the user_data parameter and run apply, Terraform will terminate the original instance and launch a totally new one. Terraform’s default behavior is to update the original instance in place, but since User Data runs only on the very first boot, and your original instance already went through that boot process, you need to force the creation of a new instance to ensure your new User Data script actually gets executed.
+## Allow EC2 instance to receive traffic (SG) & TF references
+* By default, AWS does not allow any incoming or outgoing traffic from an EC2 Instance. To allow the EC2 Instance to receive traffic on port 8080, you need to create a security group.
+* It specifies that this group allows incoming TCP requests on port 8080 from the CIDR block 0.0.0.0/0. CIDR blocks are a concise way to specify IP address ranges. For example, a CIDR block of 10.0.0.0/24 represents all IP addresses between 10.0.0.0 and 10.0.0.255. The CIDR block 0.0.0.0/0 is an IP address range that includes all possible IP addresses, so this security group allows incoming requests on port 8080 from any IP.
+* Simply creating a security group isn’t enough; you need to tell the EC2 Instance to actually use it by passing the ID of the security group into the vpc_security _group_ids argument of the aws_instance resource
+* One particularly useful type of expression is a reference, which allows you to access values from other parts of your code. To access the ID of the security group resource, you are going to need to use a resource attribute reference, which uses the following syntax:
+```
+    <PROVIDER>_<TYPE>.<NAME>.<ATTRIBUTE>
+````
