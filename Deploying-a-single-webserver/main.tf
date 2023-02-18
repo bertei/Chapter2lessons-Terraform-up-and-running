@@ -5,7 +5,7 @@ provider "aws" {
 resource "aws_instance" "test-ec2" {
     ami                     = "ami-09cd747c78a9add63"
     instance_type           = "t2.micro"
-    vpc_security_group_ids  = [aws_security_group.test-sg.id] 
+    vpc_security_group_ids  = [aws_security_group] 
 
     user_data = <<-EOF
                 #!/bin/bash
