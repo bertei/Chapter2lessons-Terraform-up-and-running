@@ -1,4 +1,4 @@
-#Deploying a Web Server
+# Deploying a Web Server
 The goal is to deploy the simplest web architecture possible: a single web server that can respond to HTTP requests.
 
 ## Set up Provider (AWS)
@@ -12,7 +12,7 @@ resource "PROVIDER_TYPE" "NAME" {}
 * ami = the amazon machine image to run on the EC2 instance. The code sets the ami parameter to the id OF an ubuntu 20.04 ami in us-east-1. AMI IDs are different in every AWS region.
 * instance_type = the type of ec2 instance to run. Each type of ec2 provides different hw resources.
 * tags = Name (identifier within AWS to refer to the EC2)
-## ) Bash script 'Hello world'
+## Bash script 'Hello world'
 * Bash script that writes "Hello world" into index.html and runs a tool called busybox to fire up a web server on port 8080 to serve that file.
 * EC2 user data is a set of instructions used to configure an EC2 instance at launch time using cloud-init or shell scripting.
 * The <<-EOF and EOF are Terraform's heredoc syntax, which allows you to create multiline strings without having to insert \n characters all over the place.
