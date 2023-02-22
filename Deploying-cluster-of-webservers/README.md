@@ -23,5 +23,5 @@ data "<PROVIDER>_<TYPE>" "<NAME>" {
 ```
 To get the data ouf of a data source, you use the following syntax:
 data.<PROVIDER>_<TYPE>.<NAME>.<ATTRIBUTE>
-http://data.aws_vpc.default.id/
+data.aws_vpc.default.id
 ```

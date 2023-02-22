@@ -3,9 +3,9 @@ provider "aws" {
 }
 
 resource "aws_launch_configuration" "test-launch-configuration" {
-    ami                     = "ami-09cd747c78a9add63"
-    instance_type           = "t2.micro"
-    vpc_security_group_ids  = [aws_security_group.test-sg.id] 
+    image_id        = "ami-09cd747c78a9add63"
+    instance_type   = "t2.micro"
+    security_groups = [aws_security_group.test-sg.id] 
 
     user_data = <<-EOF
                 #!/bin/bash
@@ -24,6 +24,7 @@ resource "aws_autoscaling_group" "test-asg" {
 
     min_size = 1
     max_size = 2
+    desired_capacity = 2
 
     tag {
         key     = "Name"
