@@ -25,3 +25,12 @@ To get the data ouf of a data source, you use the following syntax:
 data.<PROVIDER>_<TYPE>.<NAME>.<ATTRIBUTE>
 data.aws_vpc.default.id
 ```
+
+## Load balancer
+* We have 2 EC2s with different ips. We'll create a LoadBalancer, which will handle requests and redirect them to both ec2s.
+* There are 3 types (ALB, NLB, CLB). In this case we use Application Load Balancer.
+* The ALB consists of several parts:
+      * **Listener**: Listens on a specific port (e.g., 80) and protocol (e.g., HTTP)
+      * **Listener rule**: Takes requests that come into a listener and sends those that match specific paths (e.g., /foo or /bar) or hostnames (e.g., foo.example.com and bar.example.com)
+      * **Target groups**: One or more servers (the ec2s) that receive requests from the load balancer. The TG also performs health checks on these servers and sends requests only to healthy nodes.
+      
